@@ -7,22 +7,29 @@
   }
   exports.Cow = Cow;
 
+  Cow.prototype = {
+    greets: function(target) {
+      if (!target)
+        throw new Error("missing target");
+      return this.name + " greets " + target;
+    }
+  };
+})(this);
 
+  Cow.prototype = {
+    greets: function(target) {
+      if (!target)
+        throw new Error("missing target");
+      return this.name + " greets " + target;
+    },
 
-Cow.prototype = {
-  greets: function(target) {
-    if (!target)
-      throw new Error("missing target");
-    return this.name + " greets " + target + "!";
-  },
-
-  lateGreets: function(target, cb) {
-    setTimeout(function(self) {
-      try {
-        cb(null, self.greets(target));
-      } catch (err) {
-        cb(err);
-      }
-    }, 1000, this);
-  }
-};
+    lateGreets: function(target, cb) {
+      setTimeout(function(self) {
+        try {
+          cb(null, self.greets(target));
+        } catch (err) {
+          cb(err);
+        }
+      }, 1000, this);
+    }
+  };
